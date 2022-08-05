@@ -19,26 +19,26 @@ void Storage::remove_product(string vend) {
 void Storage::get_product(string vend) {
 	unique_lock<mutex> ul(mtx);
 	if (products.count(vend) == 0) {
-		cout << "Товара с артикулом " << vend << " нет в наличии!" << endl;
+		cout << "Product with vendor code " << vend << " not found!" << endl;
 	}
 	else {
-		cout << "Товар с артикулом " << vend << " найден!" << endl;
-		cout << "Наименование: " << products[vend].product_name << endl;
-		cout << "Производитель: " << products[vend].manufacturer << endl;
-		cout << "Цена: " << products[vend].price << endl;
+		cout << "Product with vendor code " << vend << " found!" << endl;
+		cout << "Name: " << products[vend].product_name << endl;
+		cout << "Manufacturer: " << products[vend].manufacturer << endl;
+		cout << "Price: " << products[vend].price << endl;
 	}
 	cout << endl;
 }
 
 void Storage::get_manufacturer_products(string manuf) {
 	unique_lock<mutex> ul(mtx);
-	cout << "Товары от производителя " << manuf << ":" << endl;
+	cout << "Products of " << manuf << ":" << endl;
 	auto range = manufacturers.equal_range(manuf);
 	for (auto it = range.first; it != range.second; ++it) {
 		if (products.count(it->second.vendor_code)) {
-			cout << "Артикул: " << it->second.vendor_code << endl;
-			cout << "Наименование: " << it->second.product_name << endl;
-			cout << "Цена: " << it->second.price << endl;
+			cout << "Vendor code: " << it->second.vendor_code << endl;
+			cout << "Name: " << it->second.product_name << endl;
+			cout << "Price: " << it->second.price << endl;
 			cout << endl;
 		}
 	}
@@ -47,12 +47,12 @@ void Storage::get_manufacturer_products(string manuf) {
 
 void Storage::print_info() {
 	unique_lock<mutex> ul(mtx);
-	cout << "Перечень товаров: " << endl;
+	cout << "Products: " << endl;
 	for (auto it = products.begin(); it != products.end(); ++it) {
-		cout << "Артикул: " << it->first << endl;
-		cout << "Наименование " << it->second.product_name << endl;
-		cout << "Производитель: " << it->second.manufacturer << endl;
-		cout << "Цена: " << it->second.price << endl;
+		cout << "Vendor code: " << it->first << endl;
+		cout << "Name: " << it->second.product_name << endl;
+		cout << "Manufacturer: " << it->second.manufacturer << endl;
+		cout << "Price: " << it->second.price << endl;
 		cout << endl;
 	}
 	cout << endl;

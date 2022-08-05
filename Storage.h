@@ -19,8 +19,8 @@ class Storage {
 		}
 	};
 	
-	unordered_map<string, Product> products;  // ключ - артикул
-	multimap<string, Product> manufacturers;  // ключ - производитель
+	unordered_map<string, Product> products;  // vendore code is key
+	multimap<string, Product> manufacturers;  // manufacturer is key
 
 public:
 	void add_product(string vend, string manuf, string name, int price);

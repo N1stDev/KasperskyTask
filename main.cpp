@@ -22,8 +22,6 @@ void func2(Storage& mystorage) {
 
 int main() {
 
-	setlocale(LC_ALL, "rus");
-
 	Storage mystorage;
 	
 	thread t1(func1, ref(mystorage));
